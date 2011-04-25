@@ -537,10 +537,26 @@ class Guake(SimpleGtkApp):
 
     def accel_toggle_fullscreen(self, *args):
         """Callback toggle the fullscreen status of the main
-        window. Called by the accel key.
+        window. It uses the toolbar_visible_in_fullscreen variable
+        from gconf to decide if the tabbar will or not be
+        shown. Called by the accel key.
         """
-        if not self.is_fullscreen:
-            self.fullscreen()
+        val = self.client.get_bool(KEY('general/toolbar_visible_in_fullscreen'))
+
+        if not self.fullscreen:
+            self.window.fullscreen()
+            self.fullscreen = True
+
+            # The resizer widget really don't need to be shown in
+            # fullscreen mode, but tabbar will only be shown if a
+            # hidden gconf key is false.
+            self.resizer.hide()
+            if not val:
+                # FIXME: There's something wrong here, if we just hide
+                # it, when will we show it again?!?! Let's disable this
+                # until answering this question.
+                #self.notebook.set_show_tabs(False)
+                pass
         else:
             self.unfullscreen()
         return True
