@@ -373,7 +373,7 @@ class Guake(SimpleGtkApp):
         self.window.show_all()
         self.client.notify(KEY('/general/window_height'))
 
-        time = GdkX11.x11_get_server_time(self.window.window)
+        time = GdkX11.x11_get_server_time(self.window.get_window())
         self.window.present_with_time(time)
 
         # This is here because vte color configuration works only
