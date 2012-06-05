@@ -35,3 +35,6 @@ m4/lt~obsolete.m4
 m4/gnome-doc-utils.m4
 py-compile
 debian
+m4/intltool.m4
+py-compile
+data/org.guake.Guake.service
