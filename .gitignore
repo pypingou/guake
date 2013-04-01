@@ -5,6 +5,9 @@
 *.gmo
 Makefile
 Makefile.in
+build
+dist
+*.egg-info
 config.*
 configure
 .libs
