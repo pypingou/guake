@@ -64,7 +64,7 @@ class InstallAndUpdateDataDirectory(install):
         install.run(self)
 
         # Compile and install languages
-        for po in glob.glob (os.path.join (PO_DIR, '*.po')):
+        for po in glob.glob(os.path.join(PO_DIR, '*.po')):
             lang = os.path.basename(po[:-3])
             mo = os.path.join(MO_DIR, lang, 'guake.mo')
 
@@ -74,7 +74,7 @@ class InstallAndUpdateDataDirectory(install):
             try:
                 rc = subprocess.call(['msgfmt', '-o', mo, po])
                 if rc != 0:
-                    raise Warning, "msgfmt returned %d" % rc
+                    raise Warning("msgfmt returned %d" % rc)
             except Exception, e:
                 sys.exit(1)
 
@@ -125,13 +125,13 @@ def get_command_output(cmd, warnOnStderr=True, warnOnReturnCode=True):
     return stdout
 
 
-gtk_config = parse_pkg_config('pkg-config','gtk+-2.0')
+gtk_config = parse_pkg_config('pkg-config', 'gtk+-2.0')
 globalhotkeys = Extension(
-                "guake.globalhotkeys",
-                ['src/globalhotkeys/globalhotkeys.c',
-                 'src/globalhotkeys/keybinder.c',
-                 'src/globalhotkeys/eggaccelerators.c'],
-                **gtk_config)
+    "guake.globalhotkeys",
+    ['src/globalhotkeys/globalhotkeys.c',
+     'src/globalhotkeys/keybinder.c',
+     'src/globalhotkeys/eggaccelerators.c'],
+    **gtk_config)
 
 
 setup(
@@ -141,14 +141,14 @@ setup(
     author='Lincoln de Sousa',
     author_email='lincoln@guake.org',
     description='Drop-down terminal for GNOME',
-    long_description='''Guake is a drop-down terminal for Gnome Desktop 
-Environment, so you just need to press a key to invoke him, and press 
-again to hide.''',
+    long_description='''Guake is a drop-down terminal for Gnome Desktop
+ Environment, so you just need to press a key to invoke him, and press
+ again to hide.''',
     url='http://guake.org',
-    package_dir = {'guake': 'src'},
-    packages = ['guake'],
+    package_dir={'guake': 'src'},
+    packages=['guake'],
     scripts=['src/guake'],
-    data_files = [
+    data_files=[
         ('share/pixmaps/guake', glob.glob('data/pixmaps/*')),
         ('share/man/man1', ['data/guake.1']),
         ('share/guake', glob.glob('data/*.glade')),
@@ -166,7 +166,7 @@ again to hide.''',
          glob.glob('data/icons/48x48/apps/*.png')),
         ('share/icons/hicolor/256x256/apps/',
          glob.glob('data/icons/256x256/apps/*.png')),
-        ],
+    ],
     cmdclass={'install': InstallAndUpdateDataDirectory},
-    ext_modules=[globalhotkeys],
-    )
+    ext_modules=[globalhotkeys]
+)
