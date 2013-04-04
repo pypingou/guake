@@ -556,16 +556,15 @@ class Guake(SimpleGtkApp):
                 self.notebook.set_show_tabs(False)
         else:
             self.unfullscreen()
-        return True
 
-            # making sure that tabbar and resizer will come back to
-            # their default state.
-            self.client.notify(KEY('/general/window_tabbar'))
-            self.client.notify(KEY('/general/show_resizer'))
+        # making sure that tabbar and resizer will come back to
+        # their default state.
+        self.client.notify(KEY('/general/window_tabbar'))
+        self.client.notify(KEY('/general/show_resizer'))
 
-            # make sure the window size is correct after returning from
-            # fullscreen
-            self.client.notify(KEY('/general/window_height'))
+        # make sure the window size is correct after returning from
+        # fullscreen
+        self.client.notify(KEY('/general/window_height'))
         return True
 
     # -- callbacks --
