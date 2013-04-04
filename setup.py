@@ -47,8 +47,8 @@ class InstallAndUpdateDataDirectory(install):
     def run(self):
 
         dict_var = {'@VERSION@': '0.5.0',
-                    '@DATADIR@': '%s/share' % self.prefix,
-                    '@BINDIR@': '%s/bin' % self.prefix}
+                    '@DATADIR@': '%s%s/share' % (self.root, self.prefix),
+                    '@BINDIR@': '%s%s/bin' % (self.root, self.prefix)}
 
         # Fill template dbus service
         update_file_variable('data/org.guake.Guake.service.in',
