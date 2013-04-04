@@ -125,12 +125,11 @@ def get_command_output(cmd, warnOnStderr=True, warnOnReturnCode=True):
     return stdout
 
 
-gtk_config = parse_pkg_config('pkg-config', 'gtk+-2.0')
+gtk_config = parse_pkg_config('pkg-config', 'gtk+-3.0')
 globalhotkeys = Extension(
     "guake.globalhotkeys",
     ['src/globalhotkeys/globalhotkeys.c',
-     'src/globalhotkeys/keybinder.c',
-     'src/globalhotkeys/eggaccelerators.c'],
+     'src/globalhotkeys/bind.c'],
     **gtk_config)
 
 
@@ -151,7 +150,7 @@ setup(
     data_files=[
         ('share/pixmaps/guake', glob.glob('data/pixmaps/*')),
         ('share/man/man1', ['data/guake.1']),
-        ('share/guake', glob.glob('data/*.glade')),
+        ('share/guake', glob.glob('data/*.ui')),
         ('share/dbus-1/services/', ['data/org.guake.Guake.service']),
         ('share/application/', glob.glob('data/*.desktop')),
         ('share/icons/hicolor/16x16/apps/',
